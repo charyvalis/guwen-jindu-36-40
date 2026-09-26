@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>古文今讀 36–40 課　虛字整理與選擇題</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #1f2a1f; --muted: #6b7280; --accent: #385723; --accent-bg: #e2efda;
+    --line: #a6a6a6; --row: #f7f7f7; --hl: #c00000; --blue: #ddebf7; --orange: #fce4d6;
+    --ok: #2e7d32; --ok-bg: #e3f2e1; --bad: #c62828; --bad-bg: #fdeaea;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #161a16; --fg: #e8ece8; --muted: #9aa39a; --accent: #a9d18e; --accent-bg: #253323;
+      --line: #4a544a; --row: #1e241e; --hl: #ff8a80; --blue: #1f3040; --orange: #40291f;
+      --ok: #81c784; --ok-bg: #1f3a21; --bad: #ef9a9a; --bad-bg: #3f2222;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font-family: "DFKai-SB", "BiauKai", "標楷體", "Noto Serif TC", "Songti TC", serif;
+    font-size: 17px; line-height: 1.7;
+  }
+  main { max-width: 860px; margin: 0 auto; padding: 20px 16px 60px; }
+  h1 { text-align: center; color: var(--accent); font-size: 1.9rem; margin: 8px 0 2px; }
+  .subtitle { text-align: center; font-size: 1.35rem; font-weight: bold; margin: 0 0 6px; }
+  .lessons-line, .legend { text-align: center; color: var(--muted); font-size: .85rem; margin: 2px 0; }
+  nav.toc { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 14px 0 6px; }
+  nav.toc a {
+    text-decoration: none; color: var(--accent); background: var(--accent-bg);
+    padding: 4px 12px; border-radius: 999px; font-size: .9rem;
+  }
+  h2 {
+    color: var(--accent); font-size: 1.45rem; margin: 28px 0 10px; padding-bottom: 2px;
+    border-bottom: 2px solid #548235; scroll-margin-top: 12px;
+  }
+  h3 { font-size: 1.1rem; margin: 16px 0 6px; }
+  h3.lesson { background: var(--accent-bg); color: var(--accent); padding: 4px 10px; border-radius: 4px; margin-top: 22px; }
+  h3.lesson small { font-weight: normal; color: var(--muted); font-size: .8rem; }
+  .tablewrap { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { border: 1px solid var(--line); padding: 5px 10px; vertical-align: middle; }
+  table.meaning thead th { background: var(--accent-bg); text-align: center; font-size: .95rem; }
+  table.meaning.blue thead th { background: var(--blue); }
+  table.meaning.orange thead th { background: var(--orange); }
+  table.meaning tbody th { background: var(--row); width: 9.5em; text-align: center; font-size: .95rem; white-space: nowrap; }
+  .ex { font-size: .98rem; padding: 1px 0; }
+  .src { color: var(--muted); font-size: .75rem; margin-left: .3em; }
+  .hl { color: var(--hl); font-weight: bold; }
+  .note { font-size: .95rem; margin: 8px 0; }
+  .infoline { text-align: center; margin: 6px 0 10px; }
+  .printonly { display: none; }
+  .bar {
+    position: sticky; top: 0; z-index: 10; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px;
+    background: var(--bg); border-bottom: 1px solid var(--line); padding: 8px 0; margin: 10px 0 0;
+    font-family: system-ui, -apple-system, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif; font-size: .88rem;
+  }
+  .bar .modes { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .bar button { font: inherit; color: var(--fg); background: var(--bg); border: 0; padding: 6px 12px; cursor: pointer; }
+  .bar .seg.on { background: var(--accent); color: var(--bg); }
+  .bar .stats { flex: 1 1 auto; min-width: 9em; }
+  .bar .acts { display: inline-flex; gap: 6px; }
+  .bar .act { border: 1px solid var(--line); border-radius: 8px; }
+  .bar .act#submit { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+  .bar button:focus-visible, button.opt:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  button.opt {
+    width: 100%; text-align: left; font: inherit; color: inherit; background: transparent; cursor: pointer;
+    border: 1px solid transparent; border-radius: 8px; padding: 3px 8px; margin: 1px 0; line-height: 1.6;
+  }
+  button.opt:hover { background: var(--accent-bg); }
+  button.opt.sel { background: var(--accent-bg); border-color: var(--accent); }
+  button.opt.right { background: var(--ok-bg); border-color: var(--ok); }
+  button.opt.wrong { background: var(--bad-bg); border-color: var(--bad); }
+  button.opt .mark { margin-left: .4em; font-weight: bold; font-family: system-ui, sans-serif; }
+  button.opt.right .mark { color: var(--ok); }
+  button.opt.wrong .mark { color: var(--bad); }
+  li.q.done button.opt { cursor: default; }
+  li.q.done button.opt:hover:not(.right):not(.wrong) { background: transparent; }
+  .exp { margin: 4px 0 0 2.4em; padding: 6px 10px; border-radius: 8px; background: var(--row); font-size: .93rem; line-height: 1.6; }
+  .exp .res { margin-right: .5em; font-family: system-ui, -apple-system, "Noto Sans TC", sans-serif; }
+  .exp.ok .res { color: var(--ok); }
+  .exp.no .res { color: var(--bad); }
+  .sec-score { font-family: system-ui, -apple-system, "Noto Sans TC", sans-serif; font-size: .9rem; color: var(--muted); margin: 4px 0 0; }
+
+  .rule { font-weight: bold; margin: 8px 0; }
+  ol.qs { list-style: none; counter-reset: q; padding: 0; margin: 0; }
+  li.q { counter-increment: q; margin: 10px 0 14px; break-inside: avoid; page-break-inside: avoid; }
+  li.q .stem::before { content: "（　　）" counter(q) ". "; white-space: pre; }
+  li.q .stem { padding-left: 0; }
+  ul.opts { list-style: none; margin: 2px 0 0 2.4em; padding: 0; display: grid; grid-template-columns: 1fr 1fr; column-gap: 1em; }
+  ul.opts.one { grid-template-columns: 1fr; }
+  ul.opts .lab { margin-right: .2em; }
+  u { text-underline-offset: 3px; }
+  details.answers { margin-top: 10px; border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px; }
+  details.answers > summary { cursor: pointer; font-weight: bold; color: var(--accent); font-size: 1.05rem; padding: 4px 0; }
+  table.key thead th { background: var(--accent-bg); }
+  table.key td.c { text-align: center; white-space: nowrap; }
+  table.key td.ans { color: var(--hl); font-weight: bold; }
+  table.key { font-size: .95rem; }
+  footer { text-align: center; color: var(--muted); font-size: .8rem; margin-top: 36px; }
+  @media (max-width: 560px) {
+    body { font-size: 16px; }
+    ul.opts { grid-template-columns: 1fr; margin-left: 1.6em; }
+    .exp { margin-left: 1.6em; }
+    .bar .stats { flex-basis: 100%; order: 3; }
+    table.meaning tbody th { width: 6.5em; white-space: normal; }
+  }
+  @media print {
+    body { font-size: 12pt; }
+    main { max-width: none; padding: 0; }
+    nav.toc, .bar, .exp, .sec-score { display: none !important; }
+    .printonly { display: block; }
+    button.opt { border: 0; padding: 0; }
+    h2.newpage { page-break-before: always; }
+    h2, h3 { page-break-after: avoid; }
+    tr { page-break-inside: avoid; }
+    .tablewrap { overflow: visible; }
+    details.answers { border: none; padding: 0; }
+  }
+
+  .poem { text-align: center; margin: 8px 0 12px; font-size: 1.15rem; line-height: 1.9; }
+  .poem p { margin: 0; }
+  .poem .hl { font-size: 1.5rem; }
+</style>
+</head>
+<body>
+<main>
+<h1>古文今讀 第 36–40 課</h1>
+<p class="subtitle">虛字整理：之、而、其、度、乃、者、顧（複習）</p>
+<p class="lessons-line">第36課 魯侯養鳥　第37課 鄭人買履　第38課 吳生勢利　第39課 螳螂捕蟬　第40課 李賀作詩</p>
+<p class="legend">出處：課本標註＝課本注釋與老師註記、補充投影片；原文＝課文內容；補充＝整理時另加的用法</p>
+<p class="legend">講義版（與 Word 檔相同，適合閱讀與列印）｜<a href="./">前往互動版</a>　｜　<a href="古文今讀36-40.docx">下載 Word 檔</a></p>
+<nav class="toc" aria-label="目錄">
+<a href="#handout">虛字整理</a><a href="#idioms">成語整理</a><a href="#notes">各課重點</a><a href="#practice">虛字練習</a><a href="#lessonqs">課文選擇題</a><a href="#answers">參考答案</a>
+</nav>
+<section id="handout">
+<h2>一、之（助詞、動詞、代詞，第37課為主）</h2>
+<div class="tablewrap"><table class="meaning orange"><thead><tr><th>意義（詞性）</th><th>例句（出處）</th></tr></thead><tbody><tr><th scope="row">代詞，指量好的尺碼</th><td><div class="ex">先自度其足，而置<span class="hl">「之」</span>其坐（之：指量好的尺碼）<span class="src">（第37課，原文）</span></div><div class="ex">至之市，而忘操<span class="hl">「之」</span>（之：指量好的尺碼）<span class="src">（第37課，原文）</span></div><div class="ex">反歸取<span class="hl">「之」</span>（之：指量好的尺碼）<span class="src">（第37課，原文）</span></div></td></tr><tr><th scope="row">代詞，指鞋</th><td><div class="ex">何不試<span class="hl">「之」</span>以足（之：指鞋）<span class="src">（第37課，原文）</span></div></td></tr><tr><th scope="row">動詞，到、往</th><td><div class="ex">至<span class="hl">「之」</span>市（之：到，往市集去）<span class="src">（第37課，原文）</span></div></td></tr><tr><th scope="row">助詞，的</th><td><div class="ex">鄭人有且置履<span class="hl">「之」</span>者（補充：「……的人」，「者」字結構前加「之」的用法）<span class="src">（補充投影片）</span></div></td></tr><tr><th scope="row">代詞，指代事、物（複習）</th><td><div class="ex">人莫<span class="hl">「之」</span>知（複習：否定句賓語前置，＝人莫知之）<span class="src">（複習，第35課）</span></div></td></tr></tbody></table></div>
+<p class="note">「之」在第37課〈鄭人買履〉中反覆出現，多作代詞，依上下文分別指「量好的尺碼」或「鞋」，須仔細判斷所指為何；「至之市」的「之」則是動詞，作「到、往」解。</p>
+<h2>二、而（連詞，第37、39課為主）</h2>
+<div class="tablewrap"><table class="meaning blue"><thead><tr><th>意義（詞性）</th><th>例句（出處）</th></tr></thead><tbody><tr><th scope="row">連詞，承接（就、然後，不必譯出）</th><td><div class="ex">先自度其足，<span class="hl">「而」</span>置之其坐<span class="src">（第37課，原文）</span></div><div class="ex">至之市，<span class="hl">「而」</span>忘操之<span class="src">（第37課，原文）</span></div></td></tr><tr><th scope="row">連詞，轉折（卻、但）</th><td><div class="ex">螳螂委身曲附，欲取蟬，<span class="hl">「而」</span>不知黃雀在其傍也<span class="src">（第39課，原文）</span></div><div class="ex">此三者皆務欲得其前利，<span class="hl">「而」</span>不顧其後之有患也<span class="src">（第39課，原文）</span></div></td></tr><tr><th scope="row">連詞，修飾（表示動作的狀態，可譯作「地」）</th><td><div class="ex">黃雀延頸，欲啄螳螂，<span class="hl">「而」</span>不知彈丸在其下也<span class="src">（第39課，原文）</span></div></td></tr></tbody></table></div>
+<p class="note">「而」是常見連詞，須依前後文意判斷是「承接」（順接，不譯或譯作「就」）還是「轉折」（譯作「卻、但」）；〈螳螂捕蟬〉中三個「而不知」的「而」都是轉折用法，強調三者只顧眼前利益，卻不知禍患將至。</p>
+<h2>三、其（代詞，第39課為主）</h2>
+<div class="tablewrap"><table class="meaning "><thead><tr><th>意義（詞性）</th><th>例句（出處）</th></tr></thead><tbody><tr><th scope="row">代詞，指蟬</th><td><div class="ex">不知螳螂在<span class="hl">「其」</span>後也（其：指蟬）<span class="src">（第39課，原文）</span></div></td></tr><tr><th scope="row">代詞，指螳螂</th><td><div class="ex">不知黃雀在<span class="hl">「其」</span>傍也（其：指螳螂）<span class="src">（第39課，原文）</span></div></td></tr><tr><th scope="row">代詞，指黃雀</th><td><div class="ex">不知彈丸在<span class="hl">「其」</span>下也（其：指黃雀）<span class="src">（第39課，原文）</span></div></td></tr><tr><th scope="row">代詞，泛指蟬、螳螂、黃雀三者</th><td><div class="ex">皆務欲得<span class="hl">「其」</span>前利，而不顧<span class="hl">「其」</span>後之有患也（其：指蟬、螳螂、黃雀）<span class="src">（第39課，原文）</span></div></td></tr><tr><th scope="row">代詞，指自己（複習）</th><td><div class="ex">先自度<span class="hl">「其」</span>足（其：指鄭人自己的腳）<span class="src">（第37課，原文）</span></div></td></tr></tbody></table></div>
+<p class="note">〈螳螂捕蟬〉一文中「其」字反覆出現，每次所指對象都不同（蟬、螳螂、黃雀），需要依前後文判斷；這正是這一課常考的重點。</p>
+<h2>四、乃、者、度、以、委、務（第37、39課）</h2>
+<div class="tablewrap"><table class="meaning orange"><thead><tr><th>意義（詞性）</th><th>例句（出處）</th></tr></thead><tbody><tr><th scope="row">乃：副詞，於是、就</th><td><div class="ex">已得履，<span class="hl">「乃」</span>曰：「吾忘持度。」<span class="src">（第37課，原文）</span></div></td></tr><tr><th scope="row">者：代詞，……的人（用於名詞、動詞短語後）</th><td><div class="ex">鄭人有且置履<span class="hl">「者」</span>（者：……的人）<span class="src">（第37課，原文）</span></div></td></tr><tr><th scope="row">度：動詞，量（讀ㄉㄨㄛˋ）</th><td><div class="ex">先自<span class="hl">「度」</span>其足（度：動詞，量）<span class="src">（第37課，原文）</span></div></td></tr><tr><th scope="row">度：名詞，量好的尺碼（讀ㄉㄨˋ）</th><td><div class="ex">吾忘持<span class="hl">「度」</span>、寧信<span class="hl">「度」</span>，無自信也（度：名詞，量好的尺碼）<span class="src">（第37課，原文）</span></div></td></tr><tr><th scope="row">以：介詞，用</th><td><div class="ex">何不試之<span class="hl">「以」</span>足（以：用）<span class="src">（第37課，原文）</span></div></td></tr><tr><th scope="row">委身曲附：彎曲身體、攀附在樹幹上</th><td><div class="ex"><span class="hl">「委身曲附」</span>（形容螳螂彎曲身體，緊緊攀附在樹幹上）<span class="src">（第39課，注釋①）</span></div></td></tr><tr><th scope="row">務：動詞，致力、一心想著</th><td><div class="ex">皆<span class="hl">「務」</span>欲得其前利（務：一心想著）<span class="src">（第39課，注釋④）</span></div></td></tr></tbody></table></div>
+<p class="note">「度」是本單元的重要多音多義字：作動詞「量」時讀ㄉㄨㄛˋ，作名詞「量好的尺碼」時讀ㄉㄨˋ，同一句「寧信度，無自信也」的「度」即為名詞用法，須特別留意讀音隨詞性而改變。</p>
+<h2>五、顧（複習，ㄍㄨˋ）</h2>
+<div class="tablewrap"><table class="meaning blue"><thead><tr><th>意義（詞性）</th><th>例句（出處）</th></tr></thead><tbody><tr><th scope="row">看、張望（動詞）</th><td><div class="ex">相<span class="hl">「顧」</span>一笑、環<span class="hl">「顧」</span>、左<span class="hl">「顧」</span>右盼（複習）<span class="src">（複習，補充投影片）</span></div></td></tr><tr><th scope="row">回首、回頭看（動詞）</th><td><div class="ex">去而<span class="hl">「顧」</span>之、伯樂一<span class="hl">「顧」</span>（複習）<span class="src">（複習，第35課）</span></div></td></tr><tr><th scope="row">拜訪、探望（動詞）</th><td><div class="ex">三<span class="hl">「顧」</span>茅廬（複習）<span class="src">（複習，補充投影片）</span></div></td></tr><tr><th scope="row">關注、照應（動詞）</th><td><div class="ex"><span class="hl">「顧」</span>此失彼、奮不<span class="hl">「顧」</span>身（複習）<span class="src">（複習，補充投影片）</span></div></td></tr><tr><th scope="row">副詞，反而、連</th><td><div class="ex">人之立志，<span class="hl">「顧」</span>不如蜀鄙之僧哉？（複習，激問）<span class="src">（複習，補充投影片）</span></div></td></tr></tbody></table></div>
+<p class="note">「顧」是第31–35課單元曾整理過的多義字，本次再次複習：作動詞時有「看、回頭看、拜訪、關注」等義，作副詞時有「反而」之義，須依語境判斷。</p>
+</section>
+<section id="idioms">
+<h2>六、成語整理</h2>
+<h3>課文成語</h3>
+<div class="tablewrap"><table class="meaning "><thead><tr><th>成語</th><th>意思</th><th>出處</th></tr></thead><tbody><tr><th scope="row">以己養養鳥</th><td>用供養自己的方式去供養對方，而不顧對方真正的需求，比喻不了解對方的需求，只憑自己的想法對待別人。</td><td>第36課</td></tr><tr><th scope="row">鄭人買履</th><td>比喻拘泥固執，不知變通，只相信教條而不相信事實。</td><td>第37課</td></tr><tr><th scope="row">螳螂捕蟬，黃雀在後</th><td>比喻目光短淺，只顧眼前利益，卻不知禍患就在後面。</td><td>第39課</td></tr><tr><th scope="row">援筆立就</th><td>拿起筆立刻寫成，形容才思敏捷。</td><td>第40課</td></tr><tr><th scope="row">才高八斗</th><td>比喻才學極高。</td><td>第40課</td></tr></tbody></table></div>
+<h3>補充相關成語</h3>
+<div class="tablewrap"><table class="meaning blue"><thead><tr><th>成語</th><th>意思</th><th>出處</th></tr></thead><tbody><tr><th scope="row">故步自封</th><td>比喻墨守成規，安於現狀，不求進取。</td><td>鄭人買履，補充投影片</td></tr><tr><th scope="row">抱殘守缺</th><td>固守舊有事物或思想，而不知改進變通。</td><td>鄭人買履，補充投影片</td></tr><tr><th scope="row">曲突徙薪</th><td>比喻事先採取措施，以防患未然。</td><td>螳螂捕蟬，補充投影片</td></tr><tr><th scope="row">防患未然</th><td>在禍患尚未發生之前，就預先設法防範。</td><td>螳螂捕蟬，補充投影片</td></tr><tr><th scope="row">凡事豫則立，不豫則廢</th><td>比喻事先採取措施，以防患未然；凡事若能事先準備，就能成功，不然就會失敗。</td><td>螳螂捕蟬，補充投影片</td></tr><tr><th scope="row">臨渴掘井、臨陣磨槍</th><td>比喻事到臨頭才倉促準備，為時已晚。</td><td>螳螂捕蟬，補充投影片</td></tr><tr><th scope="row">嘔心瀝血</th><td>形容費盡心思、苦心經營。</td><td>李賀作詩，補充投影片</td></tr></tbody></table></div>
+<h3>字詞辨析相關成語</h3>
+<div class="tablewrap"><table class="meaning orange"><thead><tr><th>成語</th><th>意思</th><th>出處</th></tr></thead><tbody><tr><th scope="row">草屨、如履薄冰、棄若敝屣</th><td>「屨」「履」「屣」皆為「鞋」之古稱；如履薄冰比喻戒慎恐懼，棄若敝屣比喻毫不珍惜地丟棄。</td><td>鄭人買履，補充投影片</td></tr><tr><th scope="row">不落俗套、獨具（獨樹）一幟</th><td>形容作品有創意、風格獨特，不與人相同。</td><td>李賀作詩，補充投影片</td></tr></tbody></table></div>
+</section>
+<section id="notes">
+<h2 class="newpage">各課重點</h2>
+<h3 class="lesson">第36課　魯侯養鳥<small>　《莊子》</small></h3>
+<div class="tablewrap"><table class="meaning "><thead><tr><th>詞語</th><th>意思</th></tr></thead><tbody><tr><th scope="row">昔</th><td>從前、過去。</td></tr><tr><th scope="row">郊</th><td>都城的郊外。</td></tr><tr><th scope="row">御</th><td>迎接。</td></tr><tr><th scope="row">觴</th><td>獻酒、敬酒。</td></tr><tr><th scope="row">九韶</th><td>古代樂曲名。</td></tr><tr><th scope="row">太牢</th><td>古代祭祀，以牛、羊、豬三牲全備的供品。</td></tr><tr><th scope="row">膳</th><td>飯食。</td></tr><tr><th scope="row">眩</th><td>眼花。</td></tr><tr><th scope="row">臠</th><td>切成塊狀的肉。</td></tr></tbody></table></div>
+<p class="note">原文：昔者海鳥止於魯郊，魯侯御而觴之於廟，奏九韶以為樂，具太牢以為膳。鳥乃眩視憂悲，不敢食一臠，不敢飲一杯，三日而死。此以己養養鳥也，非以鳥養養鳥也。</p><p class="note">從前有一隻海鳥飛落在魯國都城的郊外，魯侯把牠當作神鳥，親自把牠迎接到太廟裡，用最隆重的禮節款待牠：為牠演奏〈九韶〉樂曲，準備牛、羊、豬三牲齊備的太牢給牠吃。</p><p class="note">海鳥卻因此頭暈目眩、驚恐憂傷，不敢吃一塊肉，也不敢喝一杯酒，三天後就死了。</p><p class="note">魯侯是用「養活自己的方式」去養鳥，而不是用「適合鳥的方式」去養鳥，所以好心反而害了海鳥；成語「以己養養鳥」即比喻不顧對方真正的需求，只憑自己的想法待人。</p><p class="note">本文結構為「先敘後議」：先敘述魯侯養鳥的經過，再以「此以己養養鳥也，非以鳥養養鳥也」作結論、點出寓意。相關名句：「己所不欲，勿施於人」（《論語》）、「道不同，不相為謀」（《論語》），都在說明應尊重他人真正的需求與想法，不宜將自己的標準強加在別人身上。</p>
+<h3 class="lesson">第37課　鄭人買履<small>　《韓非子》</small></h3>
+<div class="tablewrap"><table class="meaning "><thead><tr><th>詞語</th><th>意思</th></tr></thead><tbody><tr><th scope="row">且</th><td>將要。</td></tr><tr><th scope="row">置</th><td>購買。</td></tr><tr><th scope="row">履</th><td>鞋。</td></tr><tr><th scope="row">度</th><td>動詞，量，讀ㄉㄨㄛˋ；名詞，量好的尺碼，讀ㄉㄨˋ。</td></tr><tr><th scope="row">坐</th><td>通「座」，座位。</td></tr><tr><th scope="row">操</th><td>拿。</td></tr><tr><th scope="row">持</th><td>拿著。</td></tr><tr><th scope="row">罷</th><td>結束、散去。</td></tr><tr><th scope="row">遂</th><td>於是、終究。</td></tr></tbody></table></div>
+<p class="note">原文：鄭人有且置履者，先自度其足，而置之其坐。至之市，而忘操之。已得履，乃曰：「吾忘持度。」反歸取之。及反，市罷，遂不得履。人曰：「何不試之以足？」曰：「寧信度，無自信也。」</p><p class="note">鄭國有個人想去買鞋，先量好自己腳的尺寸，把量好的尺碼放在座位上，就出發到市集去，卻忘了帶著尺碼。</p><p class="note">到市集買到了鞋，才想起：「我忘記帶量好的尺碼了。」於是立刻回家去拿。等他拿著尺碼再回到市集時，市集已經散了，最後終究沒有買到鞋。</p><p class="note">有人問他：「為什麼不直接用你的腳試穿鞋子呢？」他回答：「我寧可相信量好的尺碼，也不相信自己的腳。」</p><p class="note">成語「鄭人買履」比喻拘泥固執、墨守成規，只相信既定的教條、規矩，卻不知變通、不相信眼前的事實；相關成語「故步自封」「抱殘守缺」，也都用來形容固守舊規矩、不肯改變的人。</p>
+<h3 class="lesson">第38課　吳生勢利<small>　《古今譚概》</small></h3>
+<div class="tablewrap"><table class="meaning "><thead><tr><th>詞語</th><th>意思</th></tr></thead><tbody><tr><th scope="row">趨勢</th><td>趨炎附勢，指巴結依附有權勢的人。</td></tr><tr><th scope="row">廣席</th><td>盛大的宴會。</td></tr><tr><th scope="row">布衣</th><td>平民所穿的布衣，借指平民。</td></tr><tr><th scope="row">揖</th><td>拱手行禮。</td></tr><tr><th scope="row">殊</th><td>非常。</td></tr><tr><th scope="row">私</th><td>悄悄地。</td></tr><tr><th scope="row">乃</th><td>原來是。</td></tr><tr><th scope="row">張伯起</th><td>明朝著名的戲曲作家。</td></tr><tr><th scope="row">已而</th><td>不久之後。</td></tr></tbody></table></div>
+<p class="note">導讀（原文因手寫批注較模糊，以下為老師講義整理的內容大意，正式引用時請以課本原文為準）：從前有個人年紀老邁卻極喜歡奉承、依附有權勢的人。有一次他去參加一場盛大的宴會，看到一位穿著平民布衣的人隨後到來，便只是隨意拱了拱手，草率地打了招呼，態度顯得十分傲慢。</p><p class="note">不久之後，他看見主人對這位布衣客人態度十分恭敬，才悄悄向人打聽，原來這人正是當時著名的戲曲作家張伯起。</p><p class="note">吳生這才急忙想要周到、殷勤地重新招呼，並鄭重地向張伯起拱手行禮。張伯起卻笑著對他說：「剛才已經受過你半個揖禮了，現在只要再補上另外半個就好，不必再多勞駕了。」</p><p class="note">本文藉吳生前倨後恭的態度，諷刺趨炎附勢、以貌取人的勢利心態；張伯起的回應則以幽默的方式，不動聲色地點出吳生的勢利與可笑。</p>
+<h3 class="lesson">第39課　螳螂捕蟬<small>　《說苑》</small></h3>
+<div class="tablewrap"><table class="meaning "><thead><tr><th>詞語</th><th>意思</th></tr></thead><tbody><tr><th scope="row">委身曲附</th><td>彎曲身體、攀附在樹幹上。</td></tr><tr><th scope="row">傍</th><td>旁邊。</td></tr><tr><th scope="row">延頸</th><td>伸長脖子。</td></tr><tr><th scope="row">務</th><td>致力、一心想著。</td></tr><tr><th scope="row">前利</th><td>眼前的利益。</td></tr><tr><th scope="row">患</th><td>禍害、災難。</td></tr></tbody></table></div>
+<p class="note">原文：園中有樹，其上有蟬，蟬高居悲鳴飲露，不知螳螂在其後也；螳螂委身曲附，欲取蟬，而不知黃雀在其傍也；黃雀延頸，欲啄螳螂，而不知彈丸在其下也。此三者皆務欲得其前利，而不顧其後之有患也。</p><p class="note">園子裡有一棵樹，樹上有一隻蟬，牠停在高處鳴叫、吸飲露水，卻不知道螳螂正躲在牠身後；螳螂彎曲身體、緊緊攀附在樹幹上，一心想捕食蟬，卻不知道黃雀就在牠旁邊；黃雀伸長了脖子，一心想啄食螳螂，卻不知道彈丸已經瞄準了牠。</p><p class="note">蟬、螳螂、黃雀這三者，都一心只想得到眼前的利益，卻沒有察覺到自己身後正潛伏著災禍。</p><p class="note">成語「螳螂捕蟬，黃雀在後」比喻目光短淺，只顧眼前利益，而不知禍患就在後面；相關成語「曲突徙薪」「防患未然」則正面說明應事先採取措施、預先防範，才不會像蟬、螳螂、黃雀一樣因小失大。</p>
+<h3 class="lesson">第40課　李賀作詩<small>　《新唐書》</small></h3>
+<div class="tablewrap"><table class="meaning "><thead><tr><th>詞語</th><th>意思</th></tr></thead><tbody><tr><th scope="row">旦</th><td>清晨。</td></tr><tr><th scope="row">奚奴</th><td>僕人、書僮。</td></tr><tr><th scope="row">錦囊</th><td>用錦緞製成的袋子。</td></tr><tr><th scope="row">書</th><td>寫。</td></tr><tr><th scope="row">課程</th><td>固定的格式、規定的題目。</td></tr><tr><th scope="row">率</th><td>大概、大都，讀ㄕㄨㅔˋ。</td></tr><tr><th scope="row">省</th><td>檢討、仔細看過。</td></tr><tr><th scope="row">嘔心</th><td>形容費盡心思。</td></tr></tbody></table></div>
+<p class="note">原文：賀每旦日出，騎弱馬，從小奚奴，背古錦囊，遇所得，書投囊中。未始先立題然後為詩，如他人牽合程課者。及暮歸，足成之。非大醉、弔喪，日率如此。過亦不甚省。母使婢探囊中，見所書多，即怒曰：「是兒要嘔心乃已耳！」</p><p class="note">李賀每天清晨出門，騎著一匹瘦弱的馬，帶著一個小書僮跟隨，背著一個古舊的錦囊。每當途中想到好的詩句，就立刻寫下來投入錦囊中。</p><p class="note">他不會像別人那樣，先定好題目才拼湊、遷就寫成詩；而是到了傍晚回家後，才把白天寫下的詩句整理、補足成篇。除非喝得酩酊大醉，或是要去弔喪，他每天大都是這樣創作，寫完後也不會再三檢視修改。</p><p class="note">李賀的母親曾派婢女查看錦囊，發現裡面寫的詩稿很多，便心疼地生氣說：「這孩子是要把心血嘔盡了才肯罷休啊！」</p><p class="note">成語「援筆立就」形容才思敏捷，「才高八斗」比喻才學極高，都可用來形容李賀的才華；文中母親的話也生動表現出李賀作詩的專注與用心良苦。</p>
+<h3>字音辨析</h3><div class="tablewrap"><table class="meaning "><thead><tr><th>字</th><th>讀音</th><th>例詞（出處）</th></tr></thead><tbody><tr><th scope="row">觴</th><td>ㄕㄤ</td><td>御而觴之於廟（第36課）</td></tr><tr><th scope="row">韶</th><td>ㄕㄠˊ</td><td>奏九韶以為樂（第36課）</td></tr><tr><th scope="row">臠</th><td>ㄌㄨㄢˊ</td><td>不敢食一臠（第36課）</td></tr><tr><th scope="row">眩</th><td>ㄒㄩㄢˋ</td><td>鳥乃眩視憂悲（第36課）</td></tr><tr><th scope="row">履</th><td>ㄌㄩˇ</td><td>鄭人有且置履者（第37課）</td></tr><tr><th scope="row">度</th><td>ㄉㄨㄛˋ（動詞，量）／ㄉㄨˋ（名詞，尺碼）</td><td>先自度其足／吾忘持度（第37課）</td></tr><tr><th scope="row">遂</th><td>ㄙㄨㄟˋ</td><td>遂不得履（第37課）</td></tr><tr><th scope="row">揖</th><td>ㄧ</td><td>領過半揖（第38課）</td></tr><tr><th scope="row">詢</th><td>ㄒㄩㄣˊ</td><td>私詢，乃張伯起也（第38課）</td></tr><tr><th scope="row">螳螂</th><td>ㄊㄤˊ　ㄌㄤˊ</td><td>螳螂捕蟬（第39課）</td></tr><tr><th scope="row">蟬</th><td>ㄔㄢˊ</td><td>其上有蟬（第39課）</td></tr><tr><th scope="row">委</th><td>ㄨㄟˇ</td><td>螳螂委身曲附（第39課）</td></tr><tr><th scope="row">彈丸</th><td>ㄉㄢˋ　ㄨㄢˊ</td><td>不知彈丸在其下也（第39課，名詞，彈弓的丸子）</td></tr><tr><th scope="row">彈</th><td>ㄊㄢˊ（動詞，如：彈琴）／ㄉㄢˋ（名詞，如：彈丸、子彈）</td><td>補充：多音字比較</td></tr><tr><th scope="row">奚奴</th><td>ㄒㄧ　ㄋㄨˊ</td><td>從小奚奴（第40課）</td></tr><tr><th scope="row">率</th><td>ㄕㄨㅔˋ（大概、大都）／ㄌㄩˋ（比率）</td><td>日率如此（第40課）</td></tr><tr><th scope="row">嘔</th><td>ㄡˇ</td><td>是兒要嘔心乃已耳（第40課）</td></tr></tbody></table></div>
+</section>
+<section id="practice">
+<h2 class="newpage">古文今讀 36–40 課　虛字練習</h2>
+<p class="infoline printonly">班級：＿＿＿＿　座號：＿＿＿＿　姓名：＿＿＿＿＿＿　　得分：＿＿＿＿</p>
+<p class="rule">選擇題（每題 5 分，共 100 分）。粗體加底線的字為題目所問的字。直接點選答案作答。</p>
+<h3 class="lesson">虛字練習（課文中的虛字）</h3>
+<ol class="qs">
+<li class="q" data-a="B" data-sec="v" data-pts="5"><div class="stem">「先自度其足，而置<u><b>之</b></u>其坐」的「<u><b>之</b></u>」，指的是？</div><ul class="opts"><li><span class="lab">(A)</span> 椎子</li><li><span class="lab">(B)</span> 量好的尺碼</li><li><span class="lab">(C)</span> 鞋子</li><li><span class="lab">(D)</span> 座位</li></ul></li>
+<li class="q" data-a="B" data-sec="v" data-pts="5"><div class="stem">「至<u><b>之</b></u>市，而忘操<u><b>之</b></u>」的「至<u><b>之</b></u>市」的「<u><b>之</b></u>」，意思是？</div><ul class="opts one"><li><span class="lab">(A)</span> 的</li><li><span class="lab">(B)</span> 到、往</li><li><span class="lab">(C)</span> 他</li><li><span class="lab">(D)</span> 量好的尺碼</li></ul></li>
+<li class="q" data-a="B" data-sec="v" data-pts="5"><div class="stem">「至之市，而忘操之」的「忘操之」的「之」，指的是？</div><ul class="opts"><li><span class="lab">(A)</span> 鞋子</li><li><span class="lab">(B)</span> 量好的尺碼</li><li><span class="lab">(C)</span> 座位</li><li><span class="lab">(D)</span> 市集</li></ul></li>
+<li class="q" data-a="C" data-sec="v" data-pts="5"><div class="stem">「何不試<u><b>之</b></u>以足」的「<u><b>之</b></u>」，指的是？</div><ul class="opts one"><li><span class="lab">(A)</span> 尺碼</li><li><span class="lab">(B)</span> 座位</li><li><span class="lab">(C)</span> 鞋子</li><li><span class="lab">(D)</span> 市集</li></ul></li>
+<li class="q" data-a="B" data-sec="v" data-pts="5"><div class="stem">「先自度其足，<u><b>而</b></u>置之其坐」的「<u><b>而</b></u>」，作用是？</div><ul class="opts one"><li><span class="lab">(A)</span> 轉折，卻</li><li><span class="lab">(B)</span> 承接，就、然後</li><li><span class="lab">(C)</span> 修飾，地</li><li><span class="lab">(D)</span> 疑問語氣</li></ul></li>
+<li class="q" data-a="C" data-sec="v" data-pts="5"><div class="stem">「螳螂委身曲附，欲取蟬，<u><b>而</b></u>不知黃雀在其傍也」的「<u><b>而</b></u>」，意思是？</div><ul class="opts one"><li><span class="lab">(A)</span> 並且</li><li><span class="lab">(B)</span> 於是</li><li><span class="lab">(C)</span> 卻、但（轉折）</li><li><span class="lab">(D)</span> 地</li></ul></li>
+<li class="q" data-a="C" data-sec="v" data-pts="5"><div class="stem">「此三者皆務欲得其前利，而不顧其後之有患也」的「而」，用法與下列何者相同？</div><ul class="opts"><li><span class="lab">(A)</span> 先自度其足，而置之其坐</li><li><span class="lab">(B)</span> 至之市，而忘操之</li><li><span class="lab">(C)</span> 螳螂委身曲附，欲取蟬，而不知黃雀在其傍也</li><li><span class="lab">(D)</span> 以上皆非</li></ul></li>
+<li class="q" data-a="B" data-sec="v" data-pts="5"><div class="stem">「不知螳螂在<u><b>其</b></u>後也」的「<u><b>其</b></u>」，指的是？</div><ul class="opts one"><li><span class="lab">(A)</span> 螳螂</li><li><span class="lab">(B)</span> 蟬</li><li><span class="lab">(C)</span> 黃雀</li><li><span class="lab">(D)</span> 彈丸</li></ul></li>
+<li class="q" data-a="C" data-sec="v" data-pts="5"><div class="stem">「不知黃雀在<u><b>其</b></u>傍也」的「<u><b>其</b></u>」，指的是？</div><ul class="opts one"><li><span class="lab">(A)</span> 蟬</li><li><span class="lab">(B)</span> 黃雀</li><li><span class="lab">(C)</span> 螳螂</li><li><span class="lab">(D)</span> 彈丸</li></ul></li>
+<li class="q" data-a="D" data-sec="v" data-pts="5"><div class="stem">「不知彈丸在<u><b>其</b></u>下也」的「<u><b>其</b></u>」，指的是？</div><ul class="opts one"><li><span class="lab">(A)</span> 蟬</li><li><span class="lab">(B)</span> 螳螂</li><li><span class="lab">(C)</span> 彈丸</li><li><span class="lab">(D)</span> 黃雀</li></ul></li>
+<li class="q" data-a="C" data-sec="v" data-pts="5"><div class="stem">「皆務欲得其前利，而不顧其後之有患也」的「其」，指的是？</div><ul class="opts"><li><span class="lab">(A)</span> 只有蟬</li><li><span class="lab">(B)</span> 只有黃雀</li><li><span class="lab">(C)</span> 蟬、螳螂、黃雀三者</li><li><span class="lab">(D)</span> 作者自己</li></ul></li>
+<li class="q" data-a="B" data-sec="v" data-pts="5"><div class="stem">「已得履，<u><b>乃</b></u>曰：『吾忘持度。』」的「<u><b>乃</b></u>」，意思是？</div><ul class="opts one"><li><span class="lab">(A)</span> 竟然</li><li><span class="lab">(B)</span> 於是、就</li><li><span class="lab">(C)</span> 才</li><li><span class="lab">(D)</span> 就是</li></ul></li>
+<li class="q" data-a="B" data-sec="v" data-pts="5"><div class="stem">「先自<u><b>度</b></u>其足」的「<u><b>度</b></u>」，讀音與詞性是？</div><ul class="opts one"><li><span class="lab">(A)</span> ㄉㄨˋ，名詞</li><li><span class="lab">(B)</span> ㄉㄨㄛˋ，動詞，量</li><li><span class="lab">(C)</span> ㄉㄨㄛˋ，名詞</li><li><span class="lab">(D)</span> ㄉㄨˋ，動詞</li></ul></li>
+<li class="q" data-a="B" data-sec="v" data-pts="5"><div class="stem">「寧信<u><b>度</b></u>，無自信也」的「<u><b>度</b></u>」，讀音與意思是？</div><ul class="opts one"><li><span class="lab">(A)</span> ㄉㄨㄛˋ，動詞，量</li><li><span class="lab">(B)</span> ㄉㄨˋ，名詞，量好的尺碼</li><li><span class="lab">(C)</span> ㄉㄨˋ，動詞，猜測</li><li><span class="lab">(D)</span> ㄉㄨㄛˋ，名詞，制度</li></ul></li>
+<li class="q" data-a="B" data-sec="v" data-pts="5"><div class="stem">（複習）「去而<u><b>顧</b></u>之」「伯樂一<u><b>顧</b></u>」的「<u><b>顧</b></u>」，意思是？</div><ul class="opts one"><li><span class="lab">(A)</span> 拜訪</li><li><span class="lab">(B)</span> 回頭看</li><li><span class="lab">(C)</span> 關注、照應</li><li><span class="lab">(D)</span> 反而</li></ul></li>
+</ol>
+<h3 class="lesson">成語練習</h3>
+<ol class="qs" style="counter-reset: q 15">
+<li class="q" data-a="B" data-sec="c" data-pts="5"><div class="stem">成語「以己養養鳥」比喻什麼？</div><ul class="opts one"><li><span class="lab">(A)</span> 對別人非常慷慨大方</li><li><span class="lab">(B)</span> 不了解對方真正的需求，只憑自己的想法對待別人</li><li><span class="lab">(C)</span> 善於供養動物</li><li><span class="lab">(D)</span> 珍惜眼前所擁有的一切</li></ul></li>
+<li class="q" data-a="B" data-sec="c" data-pts="5"><div class="stem">成語「鄭人買履」比喻什麼？</div><ul class="opts one"><li><span class="lab">(A)</span> 做事謹慎小心</li><li><span class="lab">(B)</span> 拘泥固執，只相信教條而不知變通</li><li><span class="lab">(C)</span> 善於精打細算</li><li><span class="lab">(D)</span> 樂於助人</li></ul></li>
+<li class="q" data-a="B" data-sec="c" data-pts="5"><div class="stem">成語「螳螂捕蟬，黃雀在後」比喻什麼？</div><ul class="opts one"><li><span class="lab">(A)</span> 做事按部就班</li><li><span class="lab">(B)</span> 只顧眼前的利益，卻不知禍患就在後面</li><li><span class="lab">(C)</span> 擅長觀察環境</li><li><span class="lab">(D)</span> 團結合作，一起完成任務</li></ul></li>
+<li class="q" data-a="B" data-sec="c" data-pts="5"><div class="stem">成語「援筆立就」形容什麼？</div><ul class="opts one"><li><span class="lab">(A)</span> 字跡工整</li><li><span class="lab">(B)</span> 才思敏捷，提筆立刻寫成文章</li><li><span class="lab">(C)</span> 非常節省筆墨</li><li><span class="lab">(D)</span> 寫字速度緩慢</li></ul></li>
+<li class="q" data-a="D" data-sec="c" data-pts="5"><div class="stem">「曲突徙薪」「防患未然」這兩個成語，最適合用來說明下列哪一課的啟示？</div><ul class="opts"><li><span class="lab">(A)</span> 魯侯養鳥</li><li><span class="lab">(B)</span> 鄭人買履</li><li><span class="lab">(C)</span> 吳生勢利</li><li><span class="lab">(D)</span> 螳螂捕蟬</li></ul></li>
+</ol>
+</section>
+<section id="lessonqs">
+<h2 class="newpage">古文今讀 36–40 課　課文選擇題</h2>
+<p class="infoline printonly">班級：＿＿＿＿　座號：＿＿＿＿　姓名：＿＿＿＿＿＿　　得分：＿＿＿＿</p>
+<p class="rule">課文文意選擇題（每課 4 題，每題 5 分，共 100 分）。</p>
+<h3 class="lesson">第36課　魯侯養鳥<small>　《莊子》</small></h3>
+<ol class="qs">
+<li class="q" data-a="B" data-sec="l36" data-pts="5"><div class="stem">魯侯用什麼方式對待落降的海鳥？</div><ul class="opts one"><li><span class="lab">(A)</span> 把牠養在籠中飼養</li><li><span class="lab">(B)</span> 用供養自己的方式款待牠：奏〈九韶〉、備太牢</li><li><span class="lab">(C)</span> 放牠自由飛回大海</li><li><span class="lab">(D)</span> 請人研究牠的習性</li></ul></li>
+<li class="q" data-a="C" data-sec="l36" data-pts="5"><div class="stem">海鳥為什麼「三日而死」？</div><ul class="opts one"><li><span class="lab">(A)</span> 吃了不新鮮的食物</li><li><span class="lab">(B)</span> 年紀已老，體弱多病</li><li><span class="lab">(C)</span> 受到人類供養方式的驚嚇，眩視憂悲，不飲不食</li><li><span class="lab">(D)</span> 被其他動物攻擊</li></ul></li>
+<li class="q" data-a="B" data-sec="l36" data-pts="5"><div class="stem">「此以己養養鳥也，非以鳥養養鳥也」的意思是？</div><ul class="opts one"><li><span class="lab">(A)</span> 魯侯用適合鳥的方式養鳥</li><li><span class="lab">(B)</span> 魯侯用養活自己的方式去養鳥，而非用適合鳥的方式</li><li><span class="lab">(C)</span> 魯侯根本不懂得如何養鳥</li><li><span class="lab">(D)</span> 海鳥其實很滿意魯侯的招待</li></ul></li>
+<li class="q" data-a="A" data-sec="l36" data-pts="5"><div class="stem">本文最主要想傳達的道理是？</div><ul class="opts"><li><span class="lab">(A)</span> 待人處事應了解對方真正的需求，不可只憑自己的想法</li><li><span class="lab">(B)</span> 對待珍貴的事物應格外慎重</li><li><span class="lab">(C)</span> 舉辦盛大的宴會才能表示誠意</li><li><span class="lab">(D)</span> 動物比人類更需要細心照顧</li></ul></li>
+</ol>
+<h3 class="lesson">第37課　鄭人買履<small>　《韓非子》</small></h3>
+<ol class="qs">
+<li class="q" data-a="B" data-sec="l37" data-pts="5"><div class="stem">鄭人到市集買鞋之前，先做了什麼準備？</div><ul class="opts one"><li><span class="lab">(A)</span> 向朋友借錢</li><li><span class="lab">(B)</span> 量好自己腳的尺碼</li><li><span class="lab">(C)</span> 先去市集探路</li><li><span class="lab">(D)</span> 找人陪同前往</li></ul></li>
+<li class="q" data-a="B" data-sec="l37" data-pts="5"><div class="stem">鄭人為什麼最後沒買到鞋？</div><ul class="opts one"><li><span class="lab">(A)</span> 鞋子太貴買不起</li><li><span class="lab">(B)</span> 忘記帶量好的尺碼，回家拿時市集已經散了</li><li><span class="lab">(C)</span> 市集裡沒有賣鞋的攤位</li><li><span class="lab">(D)</span> 他忘記自己要買鞋</li></ul></li>
+<li class="q" data-a="B" data-sec="l37" data-pts="5"><div class="stem">有人問鄭人「何不試之以足」，他怎麼回答？</div><ul class="opts one"><li><span class="lab">(A)</span> 沒有時間試穿</li><li><span class="lab">(B)</span> 寧可相信量好的尺碼，也不相信自己的腳</li><li><span class="lab">(C)</span> 試穿鞋子不禮貌</li><li><span class="lab">(D)</span> 他根本聽不懂這個問題</li></ul></li>
+<li class="q" data-a="B" data-sec="l37" data-pts="5"><div class="stem">本文主要諷刺的是哪一種人？</div><ul class="opts"><li><span class="lab">(A)</span> 貪小便宜的人</li><li><span class="lab">(B)</span> 拘泥教條、墨守成規、不知變通的人</li><li><span class="lab">(C)</span> 個性急躁、做事草率的人</li><li><span class="lab">(D)</span> 不誠實、愛說謊的人</li></ul></li>
+</ol>
+<h3 class="lesson">第38課　吳生勢利<small>　《古今譚概》</small></h3>
+<ol class="qs">
+<li class="q" data-a="B" data-sec="l38" data-pts="5"><div class="stem">吳生一開始對布衣後至者的態度是？</div><ul class="opts one"><li><span class="lab">(A)</span> 熱情招呼，殷勤款待</li><li><span class="lab">(B)</span> 只是隨意拱手，態度顯得傲慢</li><li><span class="lab">(C)</span> 假裝沒看見對方</li><li><span class="lab">(D)</span> 立刻上前攀談</li></ul></li>
+<li class="q" data-a="B" data-sec="l38" data-pts="5"><div class="stem">吳生態度轉變的原因是？</div><ul class="opts one"><li><span class="lab">(A)</span> 主人提醒他要有禮貌</li><li><span class="lab">(B)</span> 悄悄打聽後，得知對方是著名戲曲作家張伯起</li><li><span class="lab">(C)</span> 布衣者自我介紹身分</li><li><span class="lab">(D)</span> 宴會即將結束</li></ul></li>
+<li class="q" data-a="B" data-sec="l38" data-pts="5"><div class="stem">張伯起最後怎麼回應吳生殷勤的補禮？</div><ul class="opts one"><li><span class="lab">(A)</span> 生氣地拒絕</li><li><span class="lab">(B)</span> 笑說已經受過半個揖，只需再補上另一半就好</li><li><span class="lab">(C)</span> 假裝沒聽見</li><li><span class="lab">(D)</span> 立刻起身離席</li></ul></li>
+<li class="q" data-a="A" data-sec="l38" data-pts="5"><div class="stem">本文主要諷刺哪一種人？</div><ul class="opts"><li><span class="lab">(A)</span> 趨炎附勢、以貌取人的勢利之人</li><li><span class="lab">(B)</span> 才華洋溢卻恃才傲物的人</li><li><span class="lab">(C)</span> 不擅交際、木訥寡言的人</li><li><span class="lab">(D)</span> 樂善好施、待人真誠的人</li></ul></li>
+</ol>
+<h3 class="lesson">第39課　螳螂捕蟬<small>　《說苑》</small></h3>
+<ol class="qs">
+<li class="q" data-a="B" data-sec="l39" data-pts="5"><div class="stem">蟬為什麼沒有察覺到危險？</div><ul class="opts one"><li><span class="lab">(A)</span> 牠正忙著築巢</li><li><span class="lab">(B)</span> 牠只顧著在高處鳴叫、吸飲露水，沒發現螳螂在後</li><li><span class="lab">(C)</span> 牠正在睡覺</li><li><span class="lab">(D)</span> 牠以為自己很安全，不會有天敵</li></ul></li>
+<li class="q" data-a="B" data-sec="l39" data-pts="5"><div class="stem">螳螂為什麼沒有察覺到危險？</div><ul class="opts one"><li><span class="lab">(A)</span> 牠的視力不好</li><li><span class="lab">(B)</span> 一心想捕食蟬，沒發現黃雀就在旁邊</li><li><span class="lab">(C)</span> 牠正忙著築巢</li><li><span class="lab">(D)</span> 牠以為自己很強壯</li></ul></li>
+<li class="q" data-a="B" data-sec="l39" data-pts="5"><div class="stem">「此三者皆務欲得其前利」中的「前利」是指？</div><ul class="opts one"><li><span class="lab">(A)</span> 未來的財富</li><li><span class="lab">(B)</span> 眼前的利益</li><li><span class="lab">(C)</span> 過去累積的利益</li><li><span class="lab">(D)</span> 別人的利益</li></ul></li>
+<li class="q" data-a="B" data-sec="l39" data-pts="5"><div class="stem">本文帶給我們最主要的啟示是？</div><ul class="opts"><li><span class="lab">(A)</span> 做事要團結合作</li><li><span class="lab">(B)</span> 不可只顧眼前的利益，應防範背後可能的禍患</li><li><span class="lab">(C)</span> 要懂得保護弱小的動物</li><li><span class="lab">(D)</span> 大自然的生態環環相扣，十分有趣</li></ul></li>
+</ol>
+<h3 class="lesson">第40課　李賀作詩<small>　《新唐書》</small></h3>
+<ol class="qs">
+<li class="q" data-a="B" data-sec="l40" data-pts="5"><div class="stem">李賀作詩的方式與一般人最大的不同是？</div><ul class="opts one"><li><span class="lab">(A)</span> 從不修改詩句</li><li><span class="lab">(B)</span> 不先定題目，隨時把想到的詩句寫下投入錦囊，晚上再整理成篇</li><li><span class="lab">(C)</span> 只在心情好時才寫詩</li><li><span class="lab">(D)</span> 請書僮代筆寫詩</li></ul></li>
+<li class="q" data-a="B" data-sec="l40" data-pts="5"><div class="stem">李賀的母親發現錦囊中詩稿很多時，有什麼反應？</div><ul class="opts one"><li><span class="lab">(A)</span> 讚美他才華洋溢</li><li><span class="lab">(B)</span> 心疼地說他是要嘔盡心血才肯罷休</li><li><span class="lab">(C)</span> 責備他浪費紙筆</li><li><span class="lab">(D)</span> 要求他減少寫詩的時間</li></ul></li>
+<li class="q" data-a="B" data-sec="l40" data-pts="5"><div class="stem">「非大醉、弔喪，日率如此」說明了什麼？</div><ul class="opts one"><li><span class="lab">(A)</span> 李賀很少喝醉</li><li><span class="lab">(B)</span> 李賀幾乎天天都這樣勤奮創作</li><li><span class="lab">(C)</span> 李賀常常去弔喪</li><li><span class="lab">(D)</span> 李賀的生活十分悠閒</li></ul></li>
+<li class="q" data-a="B" data-sec="l40" data-pts="5"><div class="stem">本文主要呈現李賀怎樣的形象？</div><ul class="opts"><li><span class="lab">(A)</span> 恃才傲物、目中無人</li><li><span class="lab">(B)</span> 才思敏捷、創作勤奮專注</li><li><span class="lab">(C)</span> 貪玩懶惰、不務正業</li><li><span class="lab">(D)</span> 個性內向、不善與人來往</li></ul></li>
+</ol>
+</section>
+<section id="answers">
+<h2 class="newpage">參考答案與解析</h2>
+<details class="answers"><summary>顯示參考答案與解析（老師用）</summary>
+<h3>壹、虛字練習</h3>
+<div class="tablewrap"><table class="key"><thead><tr><th>題號</th><th>答案</th><th>解析</th></tr></thead><tbody><tr><td class="c">1</td><td class="c ans">B</td><td>之：代詞，指量好的尺碼；鄭人把量好的尺碼放在座位上。</td></tr><tr><td class="c">2</td><td class="c ans">B</td><td>之：動詞，到、往，指到市集去。</td></tr><tr><td class="c">3</td><td class="c ans">B</td><td>之：代詞，指量好的尺碼；鄭人忘記帶尺碼去市集。</td></tr><tr><td class="c">4</td><td class="c ans">C</td><td>之：代詞，指鞋子；有人問他何不用腳試穿鞋子。</td></tr><tr><td class="c">5</td><td class="c ans">B</td><td>而：連詞，表承接，不須特別譯出。</td></tr><tr><td class="c">6</td><td class="c ans">C</td><td>而：連詞，表轉折，螳螂一心捕蟬，卻不知黃雀在旁。</td></tr><tr><td class="c">7</td><td class="c ans">C</td><td>兩句的「而」都是轉折用法（卻）；「先自度其足，而置之其坐」「至之市，而忘操之」的「而」則是承接用法。</td></tr><tr><td class="c">8</td><td class="c ans">B</td><td>其：代詞，指蟬；螳螂躲在蟬的身後。</td></tr><tr><td class="c">9</td><td class="c ans">C</td><td>其：代詞，指螳螂；黃雀就在螳螂旁邊。</td></tr><tr><td class="c">10</td><td class="c ans">D</td><td>其：代詞，指黃雀；彈丸瞄準的是黃雀。</td></tr><tr><td class="c">11</td><td class="c ans">C</td><td>其：代詞，泛指蟬、螳螂、黃雀三者，牠們都只顧眼前利益。</td></tr><tr><td class="c">12</td><td class="c ans">B</td><td>乃：副詞，於是、就；鄭人買到鞋才想起忘了帶尺碼。</td></tr><tr><td class="c">13</td><td class="c ans">B</td><td>度：動詞，量，讀ㄉㄨㄛˋ，指量自己腳的尺寸。</td></tr><tr><td class="c">14</td><td class="c ans">B</td><td>度：名詞，量好的尺碼，讀ㄉㄨˋ；鄭人寧可相信尺碼，不信自己的腳。</td></tr><tr><td class="c">15</td><td class="c ans">B</td><td>顧：回首、回頭看，此為第31–35課曾整理過的用法，本次複習。</td></tr></tbody></table></div>
+<h3>貳、成語練習</h3>
+<div class="tablewrap"><table class="key"><thead><tr><th>題號</th><th>答案</th><th>解析</th></tr></thead><tbody><tr><td class="c">1</td><td class="c ans">B</td><td>魯侯用供養自己的方式養鳥，卻不知鳥真正需要的是什麼，因此比喻不顧對方需求、只憑己意待人。</td></tr><tr><td class="c">2</td><td class="c ans">B</td><td>鄭人寧可相信量好的尺碼，也不相信自己的腳，比喻拘泥固執、不知變通。</td></tr><tr><td class="c">3</td><td class="c ans">B</td><td>蟬、螳螂、黃雀都一心只想得到眼前的利益，卻沒發覺自己身後正潛伏著危險。</td></tr><tr><td class="c">4</td><td class="c ans">B</td><td>援筆立就：拿起筆立刻寫成，形容才思敏捷，可用來形容李賀作詩之快。</td></tr><tr><td class="c">5</td><td class="c ans">D</td><td>〈螳螂捕蟬〉說明蟬、螳螂、黃雀只顧眼前利益而未防範禍患，正好與「曲突徙薪」「防患未然」的道理相呼應。</td></tr></tbody></table></div>
+<h3>參、課文選擇題（題號：課次－題號）</h3>
+<div class="tablewrap"><table class="key"><thead><tr><th>題號（課次－題號）</th><th>答案</th><th>解析</th></tr></thead><tbody><tr><td class="c">36－1</td><td class="c ans">B</td><td>魯侯把海鳥當神鳥，用人喜歡的隆重禮節（奏樂、太牢）款待牠。</td></tr><tr><td class="c">36－2</td><td class="c ans">C</td><td>海鳥不習慣人類的供養方式，頭暈目眩、驚恐憂傷，不敢飲食，三天後便死了。</td></tr><tr><td class="c">36－3</td><td class="c ans">B</td><td>這句話點出寓意：魯侯是憑自己的想法（人喜歡的方式）養鳥，而不是依照鳥真正的習性去養牠。</td></tr><tr><td class="c">36－4</td><td class="c ans">A</td><td>文末點出「以己養養鳥」的問題，說明應尊重對方真正的需求，正如「己所不欲，勿施於人」的道理。</td></tr><tr><td class="c">37－1</td><td class="c ans">B</td><td>「先自度其足」，鄭人先量好自己腳的尺寸。</td></tr><tr><td class="c">37－2</td><td class="c ans">B</td><td>鄭人忘了帶尺碼，回去拿，等他再到市集，市集已經散了，因此沒買到鞋。</td></tr><tr><td class="c">37－3</td><td class="c ans">B</td><td>「寧信度，無自信也」，鄭人寧可相信尺碼，也不相信自己的腳。</td></tr><tr><td class="c">37－4</td><td class="c ans">B</td><td>鄭人寧信度不信足，比喻拘泥固執、不知變通，正是本文諷刺的對象。</td></tr><tr><td class="c">38－1</td><td class="c ans">B</td><td>吳生以貌取人，見對方穿著平民布衣，便只是隨意拱手，態度傲慢。</td></tr><tr><td class="c">38－2</td><td class="c ans">B</td><td>吳生私下打聽，才知道對方原來是張伯起，於是急忙改變態度。</td></tr><tr><td class="c">38－3</td><td class="c ans">B</td><td>張伯起幽默地說剛才已受過半揖，只需再補上半個，語帶諷刺地點出吳生的勢利。</td></tr><tr><td class="c">38－4</td><td class="c ans">A</td><td>吳生依對方衣著、身分決定禮貌厚薄，本文正是諷刺這種趨炎附勢、以貌取人的勢利心態。</td></tr><tr><td class="c">39－1</td><td class="c ans">B</td><td>「蟬高居悲鳴飲露，不知螳螂在其後也」，蟬只顧著鳴叫飲露，沒注意到危險。</td></tr><tr><td class="c">39－2</td><td class="c ans">B</td><td>螳螂彎身攀附，一心捕蟬，卻不知黃雀在牠旁邊。</td></tr><tr><td class="c">39－3</td><td class="c ans">B</td><td>前利：眼前的利益，指蟬要飲露、螳螂要捕蟬、黃雀要啄螳螂，各自眼前的目標。</td></tr><tr><td class="c">39－4</td><td class="c ans">B</td><td>蟬、螳螂、黃雀都只顧眼前利益卻未察覺身後的禍患，說明凡事應事先防範，不可目光短淺。</td></tr><tr><td class="c">40－1</td><td class="c ans">B</td><td>李賀「未始先立題然後為詩」，而是隨時記下靈感，晚上再補足成篇，與一般人先定題再寫的方式不同。</td></tr><tr><td class="c">40－2</td><td class="c ans">B</td><td>母親心疼地說：「是兒要嘔心乃已耳！」，可見她對李賀用心過度感到擔憂又不捨。</td></tr><tr><td class="c">40－3</td><td class="c ans">B</td><td>除了大醉或弔喪，李賀幾乎每天都以這種方式創作，可見他十分勤奮、專注。</td></tr><tr><td class="c">40－4</td><td class="c ans">B</td><td>文中描寫李賀隨時記錄靈感、日日創作不輟，展現出他才思敏捷又勤奮專注的形象。</td></tr></tbody></table></div>
+</details>
+</section>
+</main>
+</body>
+</html>
